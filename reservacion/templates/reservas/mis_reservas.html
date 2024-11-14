@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Reservas</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif; /* Usar la fuente Helvetica */
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .reserva {
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reserva-details {
+            flex: 1;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .reserva-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-editar {
+            background-color: #45a049;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .btn-editar:hover {
+            background-color: #3c8d41;
+        }
+
+        .btn-eliminar {
+            background-color: #d9534f;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .btn-eliminar:hover {
+            background-color: #c9302c;
+        }
+
+        .btn-nueva-reserva {
+            display: block;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-nueva-reserva:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mis Reservas</h1>
+
+        {% if reservas %}
+            {% for reserva in reservas %}
+                <div class="reserva">
+                    <div class="reserva-details">
+                        <strong>{{ reserva.lugar.nombre }}</strong><br>
+                        Fecha: {{ reserva.fecha }}<br>
+                        Horario: {{ reserva.hora_inicio }} - {{ reserva.hora_fin }}<br>
+                    </div>
+
+                    <div class="reserva-buttons">
+                        <a href="{% url 'editar_reserva' reserva.id %}" class="btn btn-editar">Editar</a>
+                        <a href="{% url 'eliminar_reserva' reserva.id %}" class="btn btn-eliminar">Eliminar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No tienes reservas en este momento.</p>
+        {% endif %}
+
+        <a href="{% url 'reservar' %}" class="btn-nueva-reserva">Hacer una nueva reserva</a>
+    </div>
+</body>
+</html>

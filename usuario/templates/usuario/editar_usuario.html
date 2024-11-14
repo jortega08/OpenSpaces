@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - OpenSpaces</title>
+
+    <style>
+        /* Reseteo de márgenes y padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Aplicar fuente Helvetica */
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@300;400;600&display=swap');
+
+        /* Estilos generales */
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #f0f4f8; /* Fondo suave */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centrado de todo el contenido */
+        }
+
+        /* Estilos del header */
+        header {
+            background-color: #007bff; /* Color azul claro */
+            padding: 20px;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        /* Estilos para el contenido principal */
+        main {
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center; /* Centrado de los elementos del formulario */
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left; /* Alineación izquierda para las etiquetas */
+            width: 100%;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+            width: 80%; /* Asegura que los inputs no sean demasiado anchos */
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        input[readonly] {
+            background-color: #eaeaea;
+        }
+
+        button {
+            background-color: #007bff; /* Azul para el botón */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            width: 80%; /* Asegura que el botón no sea demasiado grande */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Azul más oscuro para el hover */
+        }
+
+        .info {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* Estilos para los campos no editables */
+        .readonly-input {
+            background-color: #eaeaea;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>OpenSpaces</h1>
+      <p>Bienvenido a OpenSpaces, la plataforma de gestión de espacios públicos en Villavicencio, Meta.</p>
+    </header>
+
+    <main>
+      <h2>Editar Perfil</h2>
+      <p>Modifica la información de tu cuenta.</p>
+
+      <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Nombre -->
+        <div>
+          <label for="id_first_name">Nombre</label>
+          {{ form.first_name }}
+        </div>
+
+        <!-- Apellido -->
+        <div>
+          <label for="id_last_name">Apellido</label>
+          {{ form.last_name }}
+        </div>
+
+        <!-- Correo Electrónico -->
+        <div>
+          <label for="id_email">Correo Electrónico</label>
+          {{ form.email }}
+        </div>
+
+        <!-- Teléfono -->
+        <div>
+            <label for="id_telefono">Teléfono</label>
+            <input type="text" id="id_telefono" name="telefono" value="{{ user.telefono }}" placeholder="Ingrese su teléfono">
+        </div>
+  
+
+        <!-- Fecha de Unión (No editable) -->
+        <div>
+          <label for="id_date_joined">Fecha de Unión</label>
+          <input type="text" name="date_joined" value="{{ user.date_joined|date:'Y-m-d H:i' }}" readonly class="readonly-input">
+        </div>
+
+        <!-- Último Inicio de Sesión (No editable) -->
+        <div>
+          <label for="id_last_login">Último Inicio de Sesión</label>
+          <input type="text" name="last_login" value="{{ user.last_login|date:'Y-m-d H:i' }}" readonly class="readonly-input">
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+            <label for="id_password">Contraseña (dejar en blanco si no desea cambiarla)</label>
+            <p>Para cambiar tu contraseña, <a href="{% url 'cambiar_contraseña' %}">haz clic aquí</a>.</p>
+        </div>
+
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

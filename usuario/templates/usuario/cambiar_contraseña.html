@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña - OpenSpaces</title>
+
+    <style>
+        /* Reseteo de márgenes y padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Aplicar fuente Helvetica Now */
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@300;400;600&display=swap');
+
+        /* Estilos generales */
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #f0f4f8; /* Fondo suave */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Estilos del header */
+        header {
+            background-color: #007bff; /* Color azul claro */
+            padding: 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        /* Estilos de navegación */
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 10px 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3; /* Azul más oscuro */
+        }
+
+        /* Estilos para el contenido principal */
+        main {
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Estilos del formulario */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007bff; /* Azul para el botón */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Azul más oscuro para el hover */
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>OpenSpaces</h1>
+      <p>Gestiona tus espacios públicos en Villavicencio, Meta.</p>
+    </header>
+
+    <main>
+      <h1>Cambiar Contraseña</h1>
+      <p>Introduce tu nueva contraseña.</p>
+
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cambiar Contraseña</button>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

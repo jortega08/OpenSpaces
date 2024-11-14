@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - OpenSpaces</title>
+
+    <style>
+        /* Reseteo de márgenes y padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Aplicar fuente Helvetica Now */
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@300;400;600&display=swap');
+
+        /* Estilos generales */
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #f0f4f8; /* Fondo suave */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Estilos del header */
+        header {
+            background-color: #007bff; /* Color azul claro */
+            padding: 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        /* Estilos de navegación */
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 10px 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3; /* Azul más oscuro */
+        }
+
+        nav ul li a.logout {
+            background-color: red; /* Botón de cerrar sesión */
+            padding: 8px 15px;
+        }
+
+        nav ul li a.logout:hover {
+            background-color: darkred; /* Efecto hover */
+        }
+
+        /* Estilos para el contenido principal */
+        main {
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Enlaces de acciones del usuario */
+        .user-actions {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e7f1ff; /* Fondo azul claro */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-actions h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #0056b3;
+        }
+
+        .user-actions a {
+            color: #007bff;
+            font-size: 18px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .user-actions a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .user-actions a.delete {
+            color: red;
+        }
+
+        /* Efectos y animaciones */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px); /* Efecto de desplazamiento */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>OpenSpaces</h1>
+      <p>Bienvenido a OpenSpaces, la aplicación diseñada para gestionar espacios públicos en Villavicencio, Meta.</p>
+      <nav>
+        <ul>
+            <li><a href="{% url 'panel_principal' %}">Inicio</a></li>  
+            <li><a href="{% url 'reservar' %}">Reservar</a></li>  
+            <li><a href="{% url 'mis_reservas' %}">Mis Reservas</a></li>  
+            <li><a href="{% url 'lugares_disponibles' %}">Lugares Disponibles</a></li>
+            <li><a href="{% url 'cerrar_sesion' %}" class="logout">Cerrar sesión</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Bienvenido, {{ user.username }}!</h2>
+      <p>Has iniciado sesión exitosamente.</p>
+      <p>Aquí puedes gestionar tus reservas de espacios públicos en Villavicencio, Meta.</p>
+
+      <!-- gestionar usuario -->
+      <div class="user-actions">
+        <h3>Gestionar tu cuenta</h3>
+        <a href="{% url 'editar_usuario' %}">Editar perfil</a>
+        <a href="{% url 'cambiar_contraseña' %}">Cambiar contraseña</a>
+        <a href="{% url 'eliminar_usuario' %}" class="delete">Eliminar cuenta</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
